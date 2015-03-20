@@ -1,0 +1,19 @@
+A implementation of a trie, based in part on https://www.cs.bu.edu/teaching/c/tree/trie/.
+
+Stores strings optimised for fast membership testing.
+
+
+USAGE
+
+#include “trie.h”
+
+trieADT trie;
+trie = TrieCreate();
+
+TrieAdd(trie, “string”);
+
+if (TrieIsMember(trie, “string”))
+    printf(“in the trie.”);
+
+TrieFree(trie);
+
