@@ -23,6 +23,10 @@ typedef struct trieCDT {
     trieNodeT *root;
 } trieCDT;
 
+/* Membership testing.
+ * for a trie, this involves finding a node at each level with the
+ * same key as the letter in that position in the string we are testing for
+ */
 bool TrieIsMember(trieADT trie, const char keys[])
 {
     /* go to the top level, and the start of the key */
@@ -68,22 +72,31 @@ bool TrieIsMember(trieADT trie, const char keys[])
     }
 }
 
+/* Creates a trie, returning a pointer to a Abstract representation 
+ * of a trie.
+ */
 trieADT TrieCreate()
 {
     /* just need to create and return a pointer to the root node? */
     trieCDT *CDT = malloc( sizeof(trieCDT) );
     
     trieNodeT *rootnode = malloc( sizeof(trieNodeT) );
+    /* it does not matter what the first key is, as value is false
+      and so it will never show up */
     rootnode->key = ' ';
     rootnode->value = false;
+    /* NULL everything to ensure free() works correctly */
     rootnode->next = NULL;
     rootnode->children = NULL;
+    /* add the first node to the root */
     CDT->root = rootnode;
     
     return CDT;
 }
 
-
+/* traverses the trie, adding new nodes where needed and setting the final
+ * element of the key added to true.
+ */
 bool TrieAdd(trieADT trie, char keys[])
 {
     trieNodeT *level = trie->root;
@@ -149,6 +162,7 @@ bool TrieAdd(trieADT trie, char keys[])
     }
 }
 
+/* frees all of the memory associated with the trie. */
 void NodeFree(trieNodeT *node)
 {
     if (node->children != NULL)
