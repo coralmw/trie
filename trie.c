@@ -33,7 +33,7 @@ bool TrieIsMember(trieADT trie, const char keys[])
     trieNodeT *level = trie->root;
     int i = 0;
 
-    for (;;) /* equivlent to while true, but hidious. */
+    for (;;) /* equivlent to while true */
     {
         trieNodeT *found = NULL;
         trieNodeT *curr;
